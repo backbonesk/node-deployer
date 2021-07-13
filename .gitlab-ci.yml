@@ -1,0 +1,24 @@
+stages:
+  - build
+
+image: docker:20.10.7
+
+variables:
+  DOCKER_TLS_CERTDIR: "/certs"
+
+services:
+  - docker:20.10.7-dind
+
+before_script:
+  - docker info
+
+build:
+  stage: build
+  tags:
+    - docker-sk
+  variables:
+    IMAGE_TAG: dr.backbone.sk/backbone/node-deployer:$CI_COMMIT_REF_SLUG
+  script:
+    - docker login -u $DOCKER_REGISTRY_USER - p $DOCKER_REGISTRY_PASSWORD $DOCKER_REGISTRY
+    - docker build -t $IMAGE_TAG .
+    - docker push $IMAGE_TAG
