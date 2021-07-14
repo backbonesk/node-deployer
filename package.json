@@ -1,7 +1,0 @@
-{
-	"name": "node-deployer",
-	"version": "1.0.0",
-	"dependencies": {
-    "ssh-deploy-release": "git+https://github.com/backbonesk/ssh-deploy-release.git#411a913a71b0f2ff54aa39a6d2e4f3ad65db2fed"
-	}
-}
