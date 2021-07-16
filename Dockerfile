@@ -1,6 +1,21 @@
-FROM node:16.4.2
+FROM node:16.4.2-slim as builder
 
-RUN apt-get update && apt-get install -y openssl
+RUN apt-get update
+RUN apt-get install -y openssl libssl-dev python make yarn git
 
-RUN npm i -g babel
-RUN npm i -g git+https://github.com/backbonesk/ssh-deploy-release.git#411a913a71b0f2ff54aa39a6d2e4f3ad65db2fed
+WORKDIR /opt
+
+RUN git clone https://github.com/backbonesk/ssh-deploy-release.git ssh-deploy-release
+WORKDIR /opt/ssh-deploy-release
+
+RUN npm i
+RUN npm pack
+
+FROM node:16.4.2-slim
+
+RUN mkdir /opt/node-deployer
+COPY --from=builder /opt/ssh-deploy-release/ssh-deploy-release-3.0.5.tgz /opt/node-deployer/ssh-deploy-release-3.0.5.tgz
+WORKDIR /opt/node-deployer
+
+RUN npm i -g ssh-deploy-release-3.0.5.tgz
+COPY deploy.js deploy.js
