@@ -1,6 +1,6 @@
 FROM node:16.4.2-slim as builder
 
-LABEL version=0.1.1
+LABEL version=1.0.2
 
 RUN apt-get update
 RUN apt-get install -y openssl libssl-dev python make git
