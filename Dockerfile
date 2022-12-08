@@ -1,23 +1,7 @@
-FROM node:16.4.2-slim as builder
-
-LABEL version=1.0.2
-
-RUN apt-get update
-RUN apt-get install -y openssl libssl-dev python make git
-
-WORKDIR /opt
-
-RUN git clone https://github.com/backbonesk/ssh-deploy-release.git ssh-deploy-release
-WORKDIR /opt/ssh-deploy-release
-
-RUN npm i
-RUN npm pack
-
-FROM node:16.4.2-slim
+FROM node:16-slim
 
 RUN mkdir /opt/node-deployer
-COPY --from=builder /opt/ssh-deploy-release/ssh-deploy-release-3.0.5.tgz /opt/node-deployer/ssh-deploy-release-3.0.5.tgz
 WORKDIR /opt/node-deployer
 
-RUN npm i -g ssh-deploy-release-3.0.5.tgz
+RUN npm i -g ssh-deploy-release
 COPY deploy.js deploy.js
