@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.2.0 : 2024-08-15
+
+Moved to GitHub...
+
 ## 1.1.0 : 2022-12-08
 
 - **Changed**: Use upstream `ssh-deploy-release` instead of BACKBONE fork (our PR was finally merged)
