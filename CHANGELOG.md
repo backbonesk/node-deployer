@@ -4,6 +4,8 @@
 
 Moved to GitHub...
 
+- **Added**: `BUILD_DIR` introduced
+
 ## 1.1.0 : 2022-12-08
 
 - **Changed**: Use upstream `ssh-deploy-release` instead of BACKBONE fork (our PR was finally merged)

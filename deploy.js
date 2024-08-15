@@ -1,7 +1,7 @@
 const Deployer = require('ssh-deploy-release');
 
 const options = {
-  localPath: 'build',
+  localPath: process.env.BUILD_DIR || 'build',
   host: process.env.REMOTE_HOST,
   username: process.env.REMOTE_USER,
   password: process.env.REMOTE_PASSWORD,
